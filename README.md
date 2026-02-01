@@ -1,12 +1,21 @@
-# PULSR Robot Control Project
-## Introduction to Robotics - Practical Assignment
+# Student Project: PULSR Kinematics & Control
+## Introduction to Robotics 
 
 ---
 
 ## Objective
-Implement a controller for the PULSR 2-link parallel robot to:
+Implement a controller for the PULSR parallelogrma link robot to:
 1. Calculate the robot's end-effector position using **Forward Kinematics**
 2. Control the robot's motion by loading and applying **pre-computed motor trajectories**
+
+---
+
+<img width="274" height="350" alt="image" src="https://github.com/user-attachments/assets/4189c334-0921-4f2d-a358-247b7471a2f2" />
+
+PULSR Parallelogram Arm Robot.
+(*Adapted from K. P. Ayodele et al., 2023.*)
+
+
 
 ---
 
@@ -21,7 +30,7 @@ Implement a controller for the PULSR 2-link parallel robot to:
 
 ---
 
-## Task 1: Forward Kinematics (40 points)
+## Task 1: Forward Kinematics
 
 **Goal:** Given the motor angles (θ1, θ2), calculate the end-effector position (X, Y).
 
@@ -29,13 +38,13 @@ Implement a controller for the PULSR 2-link parallel robot to:
 1. Convert angles from degrees to radians
 2. Apply the kinematics equations:
    ```
-   e2 = L1 × cos(θ1) + L2 × cos(θ2)
-   e1 = L1 × sin(θ1) + L2 × sin(θ2)
+   e2 = La × cos(θp) + Lb × cos(θq)
+   e1 = La × sin(θp) + Lb × sin(θq)
    ```
 3. Apply coordinate transformation (20° rotation):
    ```
-   x_screen = -(e2 × cos(20°)) - (e1 × sin(20°))
-   y_screen =  (e1 × cos(20°)) - (e2 × sin(20°))
+   x_screen =  (e1 × cos(20°)) - (e2 × sin(20°))
+   y_screen = -(e2 × cos(20°)) - (e1 × sin(20°))
    ```
 4. Scale by SCALER for screen display
 
@@ -44,11 +53,11 @@ Complete the `ForwardKinematics(double theta1, double theta2)` method.
 
 ---
 
-## Task 2: Trajectory Loading and Execution (60 points)
+## Task 2: Trajectory Loading and Execution 
 
 **Goal:** Read pre-computed motor commands from files and apply them during robot operation.
 
-### Part A: Load Trajectory Files (30 points)
+### Part A: Load Trajectory Files 
 Complete the `LoadTrajectoryFiles()` method to:
 1. Read `Nupper_targets.txt` - contains upper motor speeds
 2. Read `Nlower_targets.txt` - contains lower motor speeds
@@ -60,7 +69,7 @@ Complete the `LoadTrajectoryFiles()` method to:
 - Use `int.TryParse()` to safely convert strings to integers
 - Handle potential file errors with try/catch
 
-### Part B: Apply Motor Commands (30 points)
+### Part B: Apply Motor Commands 
 Complete the `CalculateControl()` method to:
 1. Map the current orbit angle to a step index:
    - Angle 270° = Step 0

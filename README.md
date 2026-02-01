@@ -38,6 +38,7 @@ PULSR Parallelogram Arm Robot.
 1. Convert angles from degrees to radians
 2. Apply the kinematics equations:
    ```
+   (Hint: Sample Kinematics equation for a planar robot)
    e2 = La × cos(θp) + Lb × cos(θq)
    e1 = La × sin(θp) + Lb × sin(θq)
    ```
